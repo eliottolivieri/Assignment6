@@ -4,11 +4,26 @@ var carList = ["Ferrari","Lamborghini","Pagani","Mclaren","Porsche","GT86","Bent
     for(var i = 0; i < carList.length; i++){
         var tempCar = carList[i];
         console.log(tempCar);
-        $("#buttonContainer").append("<button data-person="+tempCar+">"+tempCar+"</button>");
+        $("#buttonContainer").append("<button style='margin-right:10px; margin-left:10px;'class='myCars' data-person="+tempCar+">"+tempCar+"</button>");
+        
         } 
-    
 
-$("button").on("click", function() {
+$("#addButton").on("click", function() {
+   
+  var newCar = $("#addCar").val();
+  
+  if($("#addCar").val() != ""){
+    carList.push(newCar);
+    console.log(carList);
+    $("#buttonContainer").append("<button style='margin-right:10px; margin-left:10px; class='myCars' data-person="+newCar+">"+newCar+"</button>");
+  }
+  else{
+    alert("You cannot add an empty button!");
+  }
+  $("#addCar").val(null);
+});
+
+$(".myCars").on("click", function() {
     var carMake = $(this).attr("data-person");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
       carMake + "&api_key=OE4XP50oeDTPNxvCYBJZhtp2Oge0K4tI&limit=10";
